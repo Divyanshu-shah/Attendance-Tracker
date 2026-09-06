@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f14">
+  <title>Attendance | College tracker</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='17' fill='%2360d5d0'/%3E%3Cpath d='M16 16h32v32H16z' fill='none' stroke='%230b1a1f' stroke-width='5'/%3E%3Cpath d='m23 32 7 7 15-16' fill='none' stroke='%230b1a1f' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Attendance home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5.5 5.5h13v13h-13z" stroke="currentColor" stroke-width="1.8"/><path d="m8.5 12 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span><strong>Attendance</strong><small>Track your college attendance</small></span>
+      </a>
+      <button class="button button-primary" id="openAddButton" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        <span>Add Subject</span>
+      </button>
+    </header>
+
+    <section class="hero-grid" id="top" aria-labelledby="overview-title">
+      <article class="overview-card glass-card">
+        <div class="overview-copy">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Semester overview</div>
+          <h1 id="overview-title">Your attendance,<br><em>at a glance.</em></h1>
+          <p>Stay ahead of your classes and keep your semester on track.</p>
+          <div class="status-line">
+            <span class="status-badge" id="overallStatus">Safe</span>
+            <span id="statusMessage">You're in a healthy attendance range.</span>
+          </div>
+        </div>
+        <div class="overall-visual" aria-label="Overall attendance progress">
+          <div class="progress-ring" id="overallRing">
+            <div class="ring-center"><strong id="overallPercentage">0%</strong><span>attendance</span></div>
+          </div>
+        </div>
+      </article>
+      <aside class="quick-panel glass-card">
+        <div class="panel-heading"><span>Attendance summary</span><span class="live-indicator"><i></i> Live</span></div>
+        <div class="summary-list">
+          <div class="summary-item"><span class="summary-icon present-icon">✓</span><span>Present</span><strong id="presentCount">0</strong></div>
+          <div class="summary-item"><span class="summary-icon absent-icon">×</span><span>Absent</span><strong id="absentCount">0</strong></div>
+          <div class="summary-item"><span class="summary-icon total-icon">∑</span><span>Total classes</span><strong id="totalCount">0</strong></div>
+        </div>
+        <div class="panel-foot"><span>Updated just now</span><span class="pulse-line"></span></div>
+      </aside>
+    </section>
+
+    <section class="subjects-section" aria-labelledby="subjects-title">
+      <div class="section-heading">
+        <div><div class="eyebrow">Your semester</div><h2 id="subjects-title">Your subjects <span id="subjectCount">0</span></h2></div>
+        <div class="section-note">Tap a subject to keep your numbers current</div>
+      </div>
+      <div class="subjects-grid" id="subjectsGrid"></div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="subjectModal" aria-hidden="true">
+    <section class="modal glass-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" data-close-modal aria-label="Close subject form">×</button>
+      <div class="modal-kicker">Subject details</div>
+      <h2 id="modalTitle">Add a subject</h2>
+      <p class="modal-intro">Set your current attendance and we’ll keep the rest in sync.</p>
+      <form id="subjectForm" novalidate>
+        <input type="hidden" id="subjectId">
+        <label>Subject name<input id="subjectName" name="name" type="text" placeholder="e.g. Computer Networks" required maxlength="60"></label>
+        <label>Subject code <span>(optional)</span><input id="subjectCode" name="code" type="text" placeholder="e.g. CS 302" maxlength="20"></label>
+        <div class="form-row">
+          <label>Present classes<input id="subjectPresent" name="present" type="number" min="0" max="9999" value="0" required></label>
+          <label>Absent classes<input id="subjectAbsent" name="absent" type="number" min="0" max="9999" value="0" required></label>
+        </div>
+        <p class="form-error" id="formError" role="alert"></p>
+        <div class="modal-actions"><button class="button button-quiet" type="button" data-close-modal>Cancel</button><button class="button button-primary" type="submit" id="submitSubject">Add Subject</button></div>
+      </form>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="deleteModal" aria-hidden="true">
+    <section class="modal confirm-modal glass-card" role="dialog" aria-modal="true" aria-labelledby="deleteTitle">
+      <div class="confirm-icon">!</div><h2 id="deleteTitle">Delete this subject?</h2><p>This will permanently remove this subject's attendance data.</p>
+      <div class="modal-actions"><button class="button button-quiet" type="button" data-close-modal>Cancel</button><button class="button button-danger" type="button" id="confirmDelete">Delete</button></div>
+    </section>
+  </div>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+  <script src="script.js"></script>
+</body>
+</html>

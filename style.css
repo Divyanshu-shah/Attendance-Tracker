@@ -45,5 +45,137 @@ h1, h2, p { margin: 0; } h1 { margin: 14px 0 12px; font: 800 clamp(29px, 3.4vw, 
 .empty-state { grid-column: 1 / -1; padding: 62px 20px; text-align: center; border-radius: var(--radius-lg); border: 1px dashed var(--line-bright); background: rgba(20, 27, 35, .44); } .empty-icon { display: grid; width: 54px; height: 54px; margin: 0 auto 15px; place-items: center; color: var(--cyan); border: 1px solid rgba(96, 213, 208, .28); border-radius: 16px; font-size: 25px; } .empty-state h3 { margin: 0 0 6px; font: 700 18px "Manrope", sans-serif; } .empty-state p { margin-bottom: 20px; color: var(--muted); }
 .modal-backdrop { position: fixed; inset: 0; display: grid; padding: 20px; place-items: center; background: rgba(3, 6, 9, .75); opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s; z-index: 10; } .modal-backdrop.open { opacity: 1; visibility: visible; } .modal { width: min(100%, 480px); padding: 31px; position: relative; border-radius: 20px; transform: translateY(14px) scale(.98); transition: transform .25s; } .modal-backdrop.open .modal { transform: translateY(0) scale(1); } .modal-close { position: absolute; top: 15px; right: 17px; width: 30px; height: 30px; border: 0; border-radius: 8px; color: var(--muted); background: transparent; font-size: 24px; line-height: 1; } .modal-close:hover { color: var(--text); background: var(--surface-soft); } .modal-kicker { color: var(--cyan); text-transform: uppercase; letter-spacing: 1.6px; font-size: 10px; font-weight: 700; } .modal h2 { margin: 7px 0 5px; } .modal-intro, .confirm-modal p { color: var(--muted); font-size: 12px; } form { margin-top: 24px; } label { display: block; margin-bottom: 15px; color: var(--muted); font-size: 11px; font-weight: 600; } label span { color: var(--faint); font-weight: 400; } input { width: 100%; display: block; margin-top: 7px; padding: 12px 13px; border: 1px solid var(--line); border-radius: 8px; outline: 0; color: var(--text); background: rgba(6, 10, 14, .4); transition: border .2s, background .2s; } input:focus { border-color: var(--cyan); background: rgba(6, 10, 14, .7); } input::placeholder { color: var(--faint); } .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; } .form-error { min-height: 18px; color: var(--red); font-size: 11px; } .modal-actions { display: flex; justify-content: end; gap: 9px; margin-top: 15px; } .confirm-modal { text-align: center; } .confirm-modal .modal-actions { justify-content: center; } .confirm-icon { display: grid; width: 42px; height: 42px; margin: 2px auto 14px; place-items: center; color: var(--yellow); border: 1px solid rgba(240, 198, 116, .25); border-radius: 13px; background: rgba(240, 198, 116, .1); font-size: 22px; font-weight: 700; }
 .toast-region { position: fixed; right: 22px; bottom: 22px; display: grid; gap: 8px; z-index: 20; } .toast { padding: 12px 16px; border: 1px solid var(--line-bright); border-radius: 9px; color: var(--text); background: #18232d; box-shadow: var(--shadow); animation: toast-in .3s both; font-size: 12px; } .toast.out { animation: toast-out .3s both; } @keyframes toast-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } } @keyframes toast-out { to { opacity: 0; transform: translateY(10px); } }
-@media (max-width: 760px) { .app-shell { width: min(100% - 28px, 600px); padding-top: 19px; } .topbar { margin-bottom: 34px; } .brand small { display: none; } .hero-grid, .subjects-grid { grid-template-columns: 1fr; } .overview-card { min-height: 0; padding: 27px 24px; } .overall-visual { padding-right: 0; } .progress-ring { width: 138px; height: 138px; } .ring-center { width: 110px; height: 110px; } .ring-center strong { font-size: 24px; } .section-heading { align-items: start; gap: 15px; flex-direction: column; } .section-note { display: none; } }
-@media (max-width: 460px) { .button span { display: none; } .button-primary { padding: 11px 13px; } .overview-card { display: block; } .overall-visual { margin: 27px auto 0; } .status-line { align-items: start; flex-direction: column; gap: 7px; } .subject-card { padding: 18px; } .card-actions { flex-wrap: wrap; } .action-button.primary-action { flex: 1; } .modal { padding: 26px 20px; } }
+@media (max-width: 1024px) {
+  .app-shell { width: min(100% - 32px, 900px); padding: 24px 0 60px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 16px; margin-bottom: 50px; }
+  .subjects-grid { gap: 12px; }
+  h1 { font-size: clamp(24px, 5vw, 36px); margin: 10px 0 8px; }
+}
+@media (max-width: 768px) {
+  .ambient-one { width: 300px; height: 300px; right: -200px; top: 40px; }
+  .ambient-two { width: 280px; height: 280px; left: -220px; bottom: 60px; }
+  .app-shell { width: min(100% - 24px, 100%); padding: 18px 0 50px; }
+  .topbar { margin-bottom: 32px; gap: 12px; flex-wrap: wrap; }
+  .brand { font-size: 14px; }
+  .brand small { display: none; }
+  .button-primary { padding: 10px 14px; font-size: 13px; gap: 6px; }
+  .button-primary svg { width: 16px; height: 16px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 14px; margin-bottom: 40px; }
+  .overview-card { min-height: 280px; padding: 28px 24px; }
+  .overview-copy > p { max-width: 280px; font-size: 13px; }
+  .overall-visual { padding-right: 0; margin-top: 20px; }
+  .progress-ring { width: 140px; height: 140px; }
+  .ring-center { width: 112px; height: 112px; }
+  .ring-center strong { font-size: 26px; }
+  .ring-center span { font-size: 10px; }
+  .quick-panel { padding: 20px; }
+  .panel-heading { font-size: 9px; gap: 8px; }
+  .summary-list { margin-top: 16px; }
+  .summary-item { padding: 10px 0; gap: 8px; }
+  .summary-item > span:not(.summary-icon) { font-size: 12px; }
+  .summary-item strong { font-size: 16px; }
+  .summary-icon { width: 24px; height: 24px; font-size: 13px; }
+  h1 { font-size: clamp(22px, 5.5vw, 32px); }
+  h2 { font-size: clamp(18px, 4vw, 24px); margin-top: 4px; }
+  .section-heading { flex-direction: column; align-items: start; gap: 12px; margin-bottom: 18px; }
+  .section-note { display: none; }
+  .subjects-grid { grid-template-columns: 1fr; gap: 12px; }
+  .subject-card { padding: 18px; }
+  .subject-top { flex-direction: column; gap: 10px; align-items: start; }
+  .subject-percent { font-size: 22px; }
+  .card-actions { gap: 6px; flex-wrap: wrap; }
+  .action-button { padding: 7px 9px; font-size: 10px; min-height: 32px; flex: 1; }
+  .planner { gap: 8px; padding: 9px 10px; font-size: 10px; margin: 16px 0; }
+  .modal { width: min(100%, 90vw); padding: 24px 20px; }
+  .modal-close { width: 28px; height: 28px; font-size: 22px; }
+  input { padding: 11px 12px; font-size: 16px; }
+  label { margin-bottom: 12px; font-size: 10px; }
+  .form-row { gap: 10px; }
+}
+@media (max-width: 480px) {
+  .ambient { opacity: .12; }
+  .ambient-one { width: 250px; height: 250px; right: -220px; top: 20px; }
+  .ambient-two { width: 220px; height: 220px; left: -240px; bottom: 80px; }
+  .app-shell { width: calc(100% - 18px); padding: 14px 0 40px; margin: 0 auto; }
+  .topbar { margin-bottom: 24px; flex-direction: column; align-items: stretch; }
+  .brand { padding: 4px 0; }
+  .brand strong { font-size: 15px; }
+  .button-primary { width: 100%; padding: 12px; font-size: 12px; }
+  .hero-grid { gap: 12px; margin-bottom: 32px; }
+  .overview-card { min-height: auto; padding: 20px 16px; flex-direction: column; }
+  .overview-copy > p { font-size: 12px; max-width: 100%; }
+  .overall-visual { margin-top: 18px; }
+  .progress-ring { width: 120px; height: 120px; }
+  .ring-center { width: 96px; height: 96px; }
+  .ring-center strong { font-size: 22px; }
+  .ring-center span { font-size: 9px; }
+  .status-line { flex-direction: column; align-items: start; gap: 6px; margin-top: 18px; }
+  .quick-panel { padding: 16px; border-radius: 16px; }
+  .panel-heading { font-size: 8px; margin-bottom: 12px; }
+  .summary-list { margin-top: 12px; }
+  .summary-item { padding: 8px 0; font-size: 12px; }
+  .summary-item strong { font-size: 15px; }
+  .summary-icon { width: 22px; height: 22px; font-size: 12px; border-radius: 6px; }
+  .panel-foot { font-size: 10px; padding-top: 14px; }
+  h1 { font-size: clamp(20px, 6vw, 28px); margin: 8px 0 6px; letter-spacing: -.5px; }
+  h2 { font-size: clamp(16px, 4.5vw, 22px); margin-top: 3px; }
+  h2 span { width: 22px; height: 22px; font-size: 10px; }
+  .section-heading { margin-bottom: 14px; }
+  .eyebrow { font-size: 9px; letter-spacing: 1.4px; }
+  .subjects-grid { grid-template-columns: 1fr; gap: 10px; }
+  .subject-card { padding: 14px; border-radius: 12px; gap: 12px; }
+  .subject-top { gap: 8px; }
+  .subject-icon { width: 32px; height: 32px; font-size: 15px; border-radius: 9px; }
+  .subject-name { font-size: 14px; }
+  .subject-code { font-size: 9px; }
+  .subject-percent { font-size: 20px; }
+  .subject-meta { margin: 12px 0 6px; font-size: 10px; }
+  .bar-track { height: 5px; }
+  .planner { gap: 7px; padding: 8px 10px; font-size: 10px; margin: 12px 0; }
+  .planner svg { width: 14px; height: 14px; }
+  .card-actions { gap: 5px; }
+  .action-button { padding: 6px 8px; font-size: 9px; min-height: 30px; flex: 1; border-radius: 6px; }
+  .action-button.icon-action { width: 30px; padding: 6px 0; }
+  .empty-state { padding: 40px 14px; border-radius: 14px; }
+  .empty-icon { width: 48px; height: 48px; margin: 0 auto 12px; font-size: 22px; border-radius: 14px; }
+  .empty-state h3 { font-size: 16px; }
+  .empty-state p { font-size: 11px; }
+  .modal { padding: 20px 16px; border-radius: 16px; }
+  .modal-close { width: 26px; height: 26px; font-size: 20px; top: 12px; right: 12px; }
+  .modal-kicker { font-size: 9px; letter-spacing: 1.2px; }
+  .modal h2 { font-size: 18px; margin: 6px 0 4px; }
+  .modal-intro { font-size: 11px; }
+  input { padding: 10px 11px; font-size: 16px; margin-top: 6px; border-radius: 7px; }
+  input::placeholder { font-size: 13px; }
+  label { margin-bottom: 11px; font-size: 10px; }
+  label span { font-size: 9px; }
+  .form-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .form-error { font-size: 10px; }
+  .modal-actions { gap: 8px; margin-top: 14px; }
+  .modal-actions .button { flex: 1; padding: 10px 12px; font-size: 12px; }
+  .confirm-modal .modal-actions { justify-content: center; }
+  .confirm-modal .button { min-width: 110px; }
+  .confirm-icon { width: 38px; height: 38px; font-size: 20px; margin-bottom: 10px; }
+  .confirm-modal h2 { font-size: 16px; }
+  .confirm-modal p { font-size: 11px; }
+  .toast-region { right: 10px; bottom: 10px; gap: 6px; }
+  .toast { padding: 10px 12px; font-size: 11px; border-radius: 8px; }
+}
+@media (max-width: 320px) {
+  .app-shell { width: calc(100% - 12px); padding: 10px 0 30px; }
+  .topbar { margin-bottom: 16px; }
+  .brand-mark { width: 36px; height: 36px; }
+  .brand strong { font-size: 13px; }
+  .button-primary { padding: 10px 12px; font-size: 11px; }
+  h1 { font-size: 18px; }
+  h2 { font-size: 15px; }
+  .overview-card { padding: 14px 12px; }
+  .progress-ring { width: 100px; height: 100px; }
+  .ring-center { width: 80px; height: 80px; }
+  .ring-center strong { font-size: 18px; }
+  .subject-card { padding: 12px; }
+  .subject-percent { font-size: 18px; }
+  .action-button { padding: 5px 7px; font-size: 8px; }
+  .modal { padding: 16px 12px; }
+  input { font-size: 15px; padding: 9px 10px; }
+}
